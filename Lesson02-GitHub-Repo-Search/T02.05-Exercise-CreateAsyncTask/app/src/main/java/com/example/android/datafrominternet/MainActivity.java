@@ -18,6 +18,7 @@ package com.example.android.datafrominternet;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             String githubSearchResults = null;
             try {
                 githubSearchResults = NetworkUtils.getResponseFromHttpUrl(urls[0]);
+                Log.d("Github response", githubSearchResults);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -78,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            if (s != null && s.isEmpty()) {
+            Log.d("onPostExecute", s);
+            if (s != null && !s.equals("")) {
                 mSearchResultsTextView.setText(s);
             }
         }
